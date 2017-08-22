@@ -14,10 +14,11 @@ def blend(a, b, alpha):
         numpy.array: Blended Image.
     """
     # TODO: Your code here
+    return a * alpha + b * (1 - alpha)
 
 dolphin = cv2.imread("images/dolphin.png")
 bicycle = cv2.imread("images/bicycle.png")
 
-result = blend(dolphin, bicycle, 0.75)
-cv2.imshow('Result', result.astype(np.uint8))
+result = blend(dolphin, bicycle, 0.85)
+cv2.imshow('Result', result.astype(np.uint8)) # result may not be int, need type change.
 cv2.waitKey(0)
