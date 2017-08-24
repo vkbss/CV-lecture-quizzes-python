@@ -13,7 +13,11 @@ def normalize(img_in):
 def select_gdir(gmag, gdir, mag_min, angle_low, angle_high):
     # TODO: Find and return pixels that fall within the desired mag, angle range
 
-    pass
+    d_mag = np.zeros(gmag.shape)
+    d_mag[np.logical_and(gdir >= angle_low, gdir <= angle_high)] = 1.
+    d_mag[gmag < mag_min] = 0.
+    return d_mag
+
 
 # Load and convert image to double type, range [0, 1] for convenience
 img = cv2.imread('images/octagon.png', 0) / 255.
@@ -25,7 +29,9 @@ gy = cv2.Sobel(img, -1, dx=0, dy=1)
 cv2.imshow('Gx', gx)
 cv2.imshow('Gy', gy)
 
-gmag = np.sqrt(gx**2 + gy**2) / (4 * np.sqrt(2))
+#gmag = np.sqrt(gx**2 + gy**2) / (4 * np.sqrt(2))
+
+gmag = np.sqrt(gx**2 + gy**2)
 
 # The minus sign here is used based on how imgradient is implemented in octave
 # See https://sourceforge.net/p/octave/image/ci/default/tree/inst/imgradient.m#l61
