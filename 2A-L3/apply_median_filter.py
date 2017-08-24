@@ -28,5 +28,9 @@ img = cv2.imread('images/moon.png', 0)
 cv2.imshow('Image', img)
 
 # TODO: Add salt & pepper noise
+noisy_img = imnoise(img, 'salt & pepper', 0.02)
+cv2.imshow('noisy image', noisy_img)
 
 # TODO: Apply a median filter. Use cv2.medianBlur
+median_filtered = cv2.medianBlur(noisy_img, 3)
+cv2.imshow('filtered image', median_filtered)
