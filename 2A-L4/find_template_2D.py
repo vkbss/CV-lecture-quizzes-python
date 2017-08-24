@@ -7,9 +7,12 @@ import scipy.signal as sp
 def find_template_2D(template, img):
     # TODO: Find template in img and return [y x] location. Make sure this location is the top-left corner of the match.
     # Use scipy.signal.correlate2d
-    c = sp.correlate2d(img, template, mode = 'same')
+    # 'valid' will find the first element, which is the top-left corner.
+    # 'same' will find the central element, refer to the answers for details.
+    c = sp.correlate2d(img, template, mode = 'valid')
     y, x = np.unravel_index(np.argmax(c), c.shape)
-    return y - template.shape[0] // 2, x - template.shape[1] // 2
+    return y, x
+    #return y - template.shape[0] // 2, x - template.shape[1] // 2
 
 tablet = cv2.imread('images/tablet.png', 0)
 cv2.imshow('Tablet', tablet)
