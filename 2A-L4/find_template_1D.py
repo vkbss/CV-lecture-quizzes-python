@@ -4,7 +4,10 @@ import scipy.signal as sp
 
 def find_template_1D(t, s):
     # TODO: Locate template t in signal s and return index. Use scipy.signal.correlate2d
-    pass
+    temp = sp.correlate2d(s, t, mode = 'valid')
+    index = np.argmax(temp)
+    return index
+
 
 s = np.array([[-1, 0, 0, 5, 1, 1, 0, 0, -1, -7, 2, 1, 0, 0, -1]])
 t = np.array([[-1, -7, 2]])
